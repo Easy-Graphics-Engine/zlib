@@ -184,6 +184,14 @@ else
   cc=${CC}
 fi
 
+echo "Checking for compiler existence" >> configure.log
+if which $cc >/dev/null 2>&1; then
+  :
+else
+  echo "Failed to find an installed compiler." | tee -a configure.log
+  leave 1
+fi
+
 case "$cc" in
   *gcc*) gcc=1 ;;
   *clang*) gcc=1 ;;
